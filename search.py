@@ -1,22 +1,5 @@
-# encoding: utf-8
-import csv
 import json
 import sqlite3
-
-GEONAME_ID_IDX             = 0
-LOCALE_CODE_IDX            = 1
-CONTINENT_CODE_IDX         = 2
-CONTINENT_NAME_IDX         = 3
-COUNTRY_ISO_CODE_IDX       = 4
-COUNTRY_NAME_IDX           = 5
-SUBDIVISION_1_ISO_CODE_IDX = 6
-SUBDIVISION_1_NAME_IDX     = 7
-SUBDIVISION_2_ISO_CODE_IDX = 8
-SUBDIVISION_2_NAME_IDX     = 9
-CITY_NAME_IDX              = 10
-METRO_CODE_IDX             = 11
-TIME_ZONE_IDX              = 12
-IS_IN_EUROPEAN_UNION_IDX   = 13
 
 def make_title(obj):
     title = u'{0}'.format(*obj)
@@ -31,18 +14,6 @@ def make_title(obj):
 
 def make_subtitle(obj):
     return u'{7}, {8}'.format(*obj)
-
-def list_city(wf, city):
-    citydb = wf.stored_data('citydb')
-    if not citydb:
-        wf.add_item(u'No city in database',
-                    u'Please add a city using "timezone add [CITY NAME]"')
-
-    for row in citydb:
-        wf.add_item(title = make_title(row),
-                    subtitle = make_subtitle(row),
-                    valid = True
-        )
 
 def search_city(wf, city):
     try:
@@ -60,7 +31,7 @@ def search_city(wf, city):
                WHERE `city`.`name` LIKE ? LIMIT 25;'''
         c.execute(q, ['%'+city+'%'])
     except:
-        pass
+        return
 
     for row in c.fetchall():
         wf.add_item(title = make_title(row),
@@ -69,14 +40,3 @@ def search_city(wf, city):
                     valid = True
         )
 
-def add_city(wf, obj):
-    citydb = wf.stored_data('citydb')
-    obj = json.loads(obj)
-    if not citydb:
-        citydb = [obj]
-    else:
-        citydb.append(obj)
-    wf.store_data('citydb', citydb)
-
-def clear_db(wf):
-    wf.store_data('citydb', None)

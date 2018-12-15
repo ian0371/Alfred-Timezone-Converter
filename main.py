@@ -1,8 +1,9 @@
-# encoding: utf-8
+# -*- coding: utf-8
 from sys import exit, argv
 from workflow import Workflow
 from optparse import OptionParser
-from tz import *
+from show import *
+from search import *
 
 def main(wf):
     parser = OptionParser()
