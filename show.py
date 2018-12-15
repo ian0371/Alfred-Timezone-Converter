@@ -27,14 +27,16 @@ def list_city(wf, city):
             wf.add_item(title = title,
                         subtitle = make_subtitle(row),
                         arg = title,
-                        valid = True
+                        valid = True,
+                        icon = 'flags/{}.png'.format(row[1].lower(). replace(' ', '_'))
             )
         return
 
     for row in citydb:
         wf.add_item(title = make_title(row),
                     subtitle = make_subtitle(row),
-                    valid = True
+                    valid = True,
+                    icon = 'flags/{}.png'.format(row[1].lower(). replace(' ', '_'))
         )
     return
 

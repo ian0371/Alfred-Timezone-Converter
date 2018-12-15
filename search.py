@@ -37,6 +37,7 @@ def search_city(wf, city):
         wf.add_item(title = make_title(row),
                     subtitle = make_subtitle(row),
                     arg = json.dumps(row),
-                    valid = True
+                    valid = True,
+                    icon = 'flags/{}.png'.format(row[1].lower(). replace(' ', '_'))
         )
 
