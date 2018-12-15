@@ -2,7 +2,6 @@
 from sys import exit, argv
 from workflow import Workflow
 from optparse import OptionParser
-
 from tz import *
 
 def main(wf):
