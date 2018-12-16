@@ -1,5 +1,5 @@
 # -*- coding: utf-8
-from sys import exit, argv
+from sys import exit
 from workflow import Workflow
 from optparse import OptionParser
 from show import *
@@ -32,7 +32,6 @@ def main(wf):
     )
 
     options, args = parser.parse_args()
-    city = ' '.join(args)
 
     if options.search_city:
         search_city(wf, options.search_city)
@@ -41,7 +40,7 @@ def main(wf):
     elif options.clear:
         clear_db(wf)
     else:
-        list_city(wf, city)
+        show_times(wf, args)
 
     # Send the results to Alfred as XML
     wf.send_feedback()

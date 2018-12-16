@@ -1,1 +1,7 @@
-https://dev.maxmind.com/geoip/geoip2/geolite2/
+# Alfred Timezone Converter
+
+This product includes GeoLite2 data created by MaxMind, available from
+[https://www.maxmind.com](https://www.maxmind.com);
+images of country flags, available from
+[https://www.free-country-flags.com](https://www.free-country-flags.com).
+
