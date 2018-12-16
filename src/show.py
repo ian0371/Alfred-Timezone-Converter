@@ -36,7 +36,11 @@ def get_city_obj_by_name(db, name):
     :rtype: dict
     '''
     for obj in db:
-        if obj['city'] == name:
+        '''
+        Use 'in' instead of '==' for better UX.
+        When user is typing 'Seo', the city probably will be Seoul
+        '''
+        if name.lower() in obj['city'].lower():
             return obj
     return None
 
@@ -66,9 +70,9 @@ def show_times(wf, args):
                         u'Please add the city using "timezone add [CITY NAME]"',
                         valid = False)
             return
-        now = now.in_timezone(tmp['timezone'])
+        now = now.set(tz = tmp['timezone'])
 
-    f = 'h:mm A, MMM DD'
+    f = 'h:mm A, MMM DD (ddd)'
     for obj in db:
         dst = now.in_tz(obj['timezone'])
         title, subtitle, icon = set_format(dst, obj, f)
