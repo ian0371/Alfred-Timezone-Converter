@@ -3,17 +3,6 @@ import pendulum
 import json
 import re
 
-def make_title(obj, t, f):
-    tz = pendulum.timezone(obj['timezone'])
-    if not f:
-        f = 'h:mm A, MMM DD'
-
-    title = u'{}: {}'.format(obj['city'], tz.convert(t).format(f))
-    return title
-
-def make_subtitle(obj):
-    return u'{} ({}) • {}'.format(obj['country'], obj['country_code'], obj['timezone'])
-
 def parse(base, args):
     '''
     :param base: pendulum.datetime
@@ -51,7 +40,7 @@ def get_city_obj_by_name(db, name):
             return obj
     return None
 
-def add_item(dt, obj, f):
+def set_format(dt, obj, f):
     title = u'{}: {}'.format(obj['city'], dt.format(f))
     subtitle = u'{} ({}) • {}'.format(obj['country'], obj['country_code'], obj['timezone'])
     icon = 'flags/{}.png'.format(obj['country'].lower().replace(' ', '_'))
@@ -67,21 +56,6 @@ def show_times(wf, args):
                     u'Please add a city using "timezone add [CITY NAME]"',
                     valid = False)
         return
-    # if city and not all(date, time): # ex) args: 'Seoul'
-        # obj = get_city_obj_by_name(city)
-        # if not obj:
-            # wf.add_item(u'No such city in database',
-                        # u'Please add the city using "timezone add [CITY NAME]"',
-                        # valid = False)
-            # return
-
-        # show_time(wf, base,
-        # wf.add_item(title = title,
-                    # subtitle = make_subtitle(obj),
-                    # arg = title,
-                    # valid = True,
-                    # icon = 'flags/{}.png'.format(obj['country'].lower(). replace(' ', '_'))
-        # )
 
     now = pendulum.now()
     now, city = parse(now, args)
@@ -97,7 +71,7 @@ def show_times(wf, args):
     f = 'h:mm A, MMM DD'
     for obj in db:
         dst = now.in_tz(obj['timezone'])
-        title, subtitle, icon = add_item(dst, obj, f)
+        title, subtitle, icon = set_format(dst, obj, f)
         wf.add_item(title = title,
                     subtitle = subtitle,
                     arg = title,

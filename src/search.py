@@ -1,3 +1,4 @@
+# -*- coding: utf-8
 import json
 import sqlite3
 
@@ -35,20 +36,20 @@ def search_city(wf, city):
 
     for row in c.fetchall():
         obj = {
-            'city': row[0],
-            'country': row[1],
-            'country_code': row[2],
-            'subdiv1': row[3],
-            'subdiv1_code': row[4],
-            'subdiv2': row[5],
-            'subdiv2_code': row[6],
-            'continent': row[7],
-            'timezone': row[8],
+            'city':          row[0],
+            'country':       row[1],
+            'country_code':  row[2],
+            'subdiv1':       row[3],
+            'subdiv1_code':  row[4],
+            'subdiv2':       row[5],
+            'subdiv2_code':  row[6],
+            'continent':     row[7],
+            'timezone':      row[8],
         }
         wf.add_item(title = make_title(obj),
                     subtitle = make_subtitle(obj),
                     arg = json.dumps(obj),
                     valid = True,
-                    icon = 'flags/{}.png'.format(obj['country'].lower(). replace(' ', '_'))
+                    icon = u'flags/{}.png'.format(obj['country'].lower(). replace(' ', '_'))
         )
 

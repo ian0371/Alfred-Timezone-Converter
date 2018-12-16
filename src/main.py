@@ -1,6 +1,6 @@
 # -*- coding: utf-8
 from sys import exit
-from workflow import Workflow
+from workflow import Workflow3
 from optparse import OptionParser
 from show import *
 from search import *
@@ -46,5 +46,5 @@ def main(wf):
     wf.send_feedback()
 
 if __name__ == u"__main__":
-    wf = Workflow()
+    wf = Workflow3()
     exit(wf.run(main))
