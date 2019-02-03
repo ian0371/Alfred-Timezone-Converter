@@ -4,6 +4,8 @@ from workflow import Workflow3
 from optparse import OptionParser
 from tzconv import *
 
+__version__ = '1.1'
+
 def main(wf):
     parser = OptionParser()
     parser.add_option(
@@ -45,5 +47,28 @@ def main(wf):
     wf.send_feedback()
 
 if __name__ == u"__main__":
-    wf = Workflow3()
+    wf = Workflow3(update_settings={
+        # Your username and the workflow's repo's name.
+        'github_slug': 'ian0371/Alfred-Timezone-Converter',
+
+        # The version (i.e. release/tag) of the installed workflow.
+        # If you've set a Workflow Version in Alfred's workflow
+        # configuration sheet or if a `version` file exists in
+        # the root of your workflow, this key may be omitted
+        'version': __version__,
+
+        # Optional number of days between checks for updates.
+        'frequency': 7,
+
+        # Force checking for pre-release updates.
+        # This is only recommended when distributing a pre-release;
+        # otherwise allow users to choose whether they want
+        # production-ready or pre-release updates with the
+        # `prereleases` magic argument.
+        'prereleases': '-beta' in __version__
+    })
+
+    if wf.update_available:
+        # Download new version and tell Alfred to install it
+        wf.start_update()
     exit(wf.run(main))
