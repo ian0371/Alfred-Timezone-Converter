@@ -2,8 +2,7 @@
 from sys import exit
 from workflow import Workflow3
 from optparse import OptionParser
-from show import *
-from search import *
+from tzconv import *
 
 def main(wf):
     parser = OptionParser()
