@@ -1,4 +1,5 @@
 # Alfred Timezone Converter
+![https://thumbs.gfycat.com/EachRemarkableGoitered-size_restricted.gif](https://thumbs.gfycat.com/EachRemarkableGoitered-size_restricted.gif)
 
 ### Prerequisites & Install
 - pip
