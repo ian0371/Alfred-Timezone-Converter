@@ -9,6 +9,7 @@ pip2 install --user -r requirements.txt
 ```
 
 ### Usage
+#### Show & convert timezones
 ```
 tz [options ...]
 ```
@@ -17,11 +18,11 @@ tz [options ...]
 
 If `city` is given, times when the `city` is the date/time in `options` (or the current time if `options` is omitted) are shown.
 
-#### Examples
+##### Examples
 - `tz 22:30 Seoul`: Shows the date/time of cities when Seoul is 22:30.
 - `tz 03/01 22:30 Seoul`: Shows the date/time of cities when Seoul is 22:30, March 1st.
 
-#### Options
+##### Options
 - Date
   - `Day`: Two digits (ex) `01`: 1st day of the month
   - `Month/Day`: Two digits for `Month` and `Day`, respectively (ex) `03/01`: March 1st
@@ -36,17 +37,15 @@ That is, the followings behave the same way:
 - `tz Seoul 03/01 22:30`
 - `tz 22:30 Seoul 03/01`
 
+#### Add a city in database
 ```
 timezone add [city]
 ```
 
-Add a city in database
-
+#### Remove all cities in database
 ```
 timezone clear
 ```
-
-Remove all cities in database
 
 ### License
 This product includes GeoLite2 data created by MaxMind, available from
